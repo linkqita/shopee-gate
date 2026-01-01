@@ -1,23 +1,14 @@
-<!DOCTYPE html>
-<html>
-<body>
-<h3>🔓 Membuka Akses...</h3>
-<p>Mohon tunggu</p>
-<button id="go" disabled>LANJUTKAN</button>
-
 <script>
-const id = location.pathname.replace("/", "");
-fetch("/shopee-gate/data.json")
+const id = location.search.substring(1);
+
+fetch("data.json")
 .then(r=>r.json())
 .then(db=>{
   const d = db[id];
   if(!d) return document.body.innerHTML="Link tidak valid";
 
-  setTimeout(()=> window.open(d.shopee,"_blank"),500);
+  setTimeout(()=> window.open(d.shopee,"_blank"),600);
   setTimeout(()=> document.getElementById("go").disabled=false,1500);
-
   document.getElementById("go").onclick=()=> location.href=d.target;
 });
 </script>
-</body>
-</html>
