@@ -1,0 +1,22 @@
+<h2>ADMIN SHORTLINK</h2>
+<input id="target" placeholder="Link Tujuan"><br>
+<input id="shopee" placeholder="Link Shopee"><br>
+<button onclick="buat()">BUAT</button>
+<pre id="out"></pre>
+
+<script>
+function rand(){
+ return Math.random().toString(36).substr(2,4).toUpperCase()
+}
+
+async function buat(){
+ let t=target.value, s=shopee.value;
+ let r=await fetch("/shopee-gate/data.json");
+ let db=await r.json();
+ let k=rand();
+ db[k]={target:t, shopee:s};
+ document.getElementById("out").innerText=
+  "Kode: "+k+"\n"+
+  "Shortlink:\nhttps://username.github.io/shopee-gate/"+k;
+}
+</script>
